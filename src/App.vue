@@ -5,10 +5,18 @@ import Instrument from './components/Instrument.vue';
 import Header from './components/Header.vue';
 
 const instruments = ref([]);
+const shoppingCart = ref([]);
 
 onMounted(() => {
   instruments.value = db;
 });
+
+const addToCart = (id) => {
+  const hasInstrumentAddedId = (instrument) => instrument.id === id;
+  const instrument = instruments.value.find(hasInstrumentAddedId);
+  instrument.quantity = 1;
+  shoppingCart.value.push(instrument);
+};
 </script>
 
 <template>
@@ -20,10 +28,12 @@ onMounted(() => {
     <div class="row mt-5">
       <Instrument
         v-for="instrument in instruments"
+        :id="instrument.id"
         :image="`/img/${instrument.image}.jpg`"
         :name="instrument.name"
         :description="instrument.description"
         :price="instrument.price"
+        @add-to-cart="addToCart"
       />
     </div>
   </main>

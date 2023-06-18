@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   image: {
     type: String,
     required: true,
@@ -16,7 +16,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  id: {
+    type: Number,
+    required: true,
+  },
 });
+
+defineEmits(['add-to-cart']);
 </script>
 
 <template>
@@ -32,7 +38,13 @@ const props = defineProps({
         {{ description }}
       </p>
       <p class="fw-black text-primary fs-3">${{ price }}</p>
-      <button type="button" class="btn btn-dark w-100">Add to cart</button>
+      <button
+        type="button"
+        class="btn btn-dark w-100"
+        @click="$emit('add-to-cart', id)"
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 </template>
