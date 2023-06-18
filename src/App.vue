@@ -34,14 +34,14 @@ onMounted(() => {
             />
 
             <div id="carrito" class="bg-white p-3">
-              <p class="text-center">El carrito esta vacio</p>
+              <p class="text-center">Cart is empty</p>
               <table class="w-100 table">
                 <thead>
                   <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -68,12 +68,8 @@ onMounted(() => {
                 </tbody>
               </table>
 
-              <p class="text-end">
-                Total pagar: <span class="fw-bold">$899</span>
-              </p>
-              <button class="btn btn-dark w-100 mt-3 p-2">
-                Vaciar Carrito
-              </button>
+              <p class="text-end">Total: <span class="fw-bold">$899</span></p>
+              <button class="btn btn-dark w-100 mt-3 p-2">Empty cart</button>
             </div>
           </div>
         </nav>
@@ -94,7 +90,7 @@ onMounted(() => {
             type="button"
             class="btn fs-4 bg-primary text-white py-2 px-5"
           >
-            Agregar al Carrito
+            Add to cart
           </button>
         </div>
       </div>
@@ -108,7 +104,7 @@ onMounted(() => {
   </header>
 
   <main class="container-xl mt-5">
-    <h2 class="text-center">Nuestra Colección</h2>
+    <h2 class="text-center">Our collection</h2>
 
     <div class="row mt-5">
       <div
@@ -130,9 +126,7 @@ onMounted(() => {
             {{ instrument.description }}
           </p>
           <p class="fw-black text-primary fs-3">${{ instrument.price }}</p>
-          <button type="button" class="btn btn-dark w-100">
-            Agregar al Carrito
-          </button>
+          <button type="button" class="btn btn-dark w-100">Add to cart</button>
         </div>
       </div>
     </div>
@@ -141,7 +135,7 @@ onMounted(() => {
   <footer class="bg-dark mt-5 py-5">
     <div class="container-xl">
       <p class="text-white text-center fs-4 mt-4 m-md-0">
-        GuitarLA - Todos los derechos Reservados
+        Guitar Shop - All rights reserved
       </p>
     </div>
   </footer>
