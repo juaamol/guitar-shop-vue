@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { db } from './data/instruments';
 import Instrument from './components/Instrument.vue';
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 const instruments = ref([]);
 const shoppingCart = ref([]);
@@ -13,14 +14,20 @@ onMounted(() => {
 
 const addToCart = (id) => {
   const hasInstrumentAddedId = (instrument) => instrument.id === id;
-  const instrument = instruments.value.find(hasInstrumentAddedId);
-  instrument.quantity = 1;
-  shoppingCart.value.push(instrument);
+  const positionInCart = shoppingCart.value.findIndex(hasInstrumentAddedId);
+
+  if (positionInCart >= 0) {
+    shoppingCart.value[positionInCart].quantity++;
+  } else {
+    const instrument = instruments.value.find(hasInstrumentAddedId);
+    instrument.quantity = 1;
+    shoppingCart.value.push(instrument);
+  }
 };
 </script>
 
 <template>
-  <Header></Header>
+  <Header :shoppingCart="shoppingCart"></Header>
 
   <main class="container-xl mt-5">
     <h2 class="text-center">Our collection</h2>
@@ -38,13 +45,7 @@ const addToCart = (id) => {
     </div>
   </main>
 
-  <footer class="bg-dark mt-5 py-5">
-    <div class="container-xl">
-      <p class="text-white text-center fs-4 mt-4 m-md-0">
-        Guitar Shop - All rights reserved
-      </p>
-    </div>
-  </footer>
+  <Footer></Footer>
 </template>
 
 <style scoped></style>
