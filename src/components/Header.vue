@@ -28,7 +28,7 @@ const totalPrice = computed(() => {
       <div class="row justify-content-center justify-content-md-between">
         <div class="col-8 col-md-3">
           <a href="index.html">
-            <div class="d-flex flex-column text-white">
+            <div class="d-flex flex-column text-white logo">
               <span class="fs-4"
                 >Guitar <span class="text-primary">Shop</span></span
               >
@@ -148,4 +148,14 @@ const totalPrice = computed(() => {
   </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+.logo {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    text-align: left;
+  }
+}
+</style>
