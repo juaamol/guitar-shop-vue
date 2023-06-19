@@ -4,7 +4,7 @@ export const db = [
     name: 'Lukather',
     image: 'guitarra_01',
     description:
-      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
+      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit. Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
     price: 299,
   },
   {
@@ -12,7 +12,7 @@ export const db = [
     name: 'SRV',
     image: 'guitarra_02',
     description:
-      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
+      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
     price: 349,
   },
   {
@@ -20,7 +20,7 @@ export const db = [
     name: 'Borland',
     image: 'guitarra_03',
     description:
-      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
+      'Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit Morbi ornare augue nisl, vel elementum dui mollis vel. Curabitur non ex id eros fermentum hendrerit.',
     price: 329,
   },
   {

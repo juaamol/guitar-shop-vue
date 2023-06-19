@@ -1,5 +1,6 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { db } from '../data/instruments';
 
 const props = defineProps({
   shoppingCart: {
@@ -8,7 +9,10 @@ const props = defineProps({
   },
 });
 
+const mainInstrument = ref({});
+
 defineEmits([
+  'add-to-cart',
   'increase-quantity',
   'decrease-quantity',
   'remove-from-cart',
@@ -19,6 +23,10 @@ const totalPrice = computed(() => {
   return props.shoppingCart.reduce((total, instrument) => {
     return total + instrument.quantity * instrument.price;
   }, 0);
+});
+
+onMounted(() => {
+  mainInstrument.value = db[0] || {};
 });
 </script>
 
@@ -122,17 +130,15 @@ const totalPrice = computed(() => {
 
       <div class="row mt-5">
         <div class="col-md-6 text-center text-md-start pt-5">
-          <h1 class="display-2 fw-bold">Modelo VAI</h1>
+          <h1 class="display-2 fw-bold">Model {{ mainInstrument.name }}</h1>
           <p class="mt-5 fs-5 text-white">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus,
-            possimus quibusdam dolor nemo velit quo, fuga omnis, iure molestias
-            optio tempore sint at ipsa dolorum odio exercitationem eos inventore
-            odit.
+            {{ mainInstrument.description }}
           </p>
-          <p class="text-primary fs-1 fw-black">$399</p>
+          <p class="text-primary fs-1 fw-black">${{ mainInstrument.price }}</p>
           <button
             type="button"
             class="btn fs-4 bg-primary text-white py-2 px-5"
+            @click="$emit('add-to-cart', mainInstrument.id)"
           >
             Add to cart
           </button>

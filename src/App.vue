@@ -13,9 +13,8 @@ const addToCart = (id) => {
   const instrument = instruments.value.find(hasId);
   const positionInCart = shoppingCart.value.findIndex(hasId);
 
-  instrument.quantity = 1;
-
   if (positionInCart < 0) {
+    instrument.quantity = 1;
     shoppingCart.value.push(instrument);
   }
 };
@@ -68,6 +67,7 @@ watch(shoppingCart, saveShoppingCart, { deep: true });
 <template>
   <Header
     :shoppingCart="shoppingCart"
+    @add-to-cart="addToCart"
     @increase-quantity="increaseQuantity"
     @decrease-quantity="decreaseQuantity"
     @remove-from-cart="removeFromCart"
