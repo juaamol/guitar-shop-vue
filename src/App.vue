@@ -81,6 +81,7 @@ watch(shoppingCart, saveShoppingCart, { deep: true });
       <Instrument
         v-for="instrument in instruments"
         :id="instrument.id"
+        :key="instrument.id"
         :image="`/img/${instrument.image}.jpg`"
         :name="instrument.name"
         :description="instrument.description"

@@ -70,7 +70,7 @@ onMounted(() => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="instrument in shoppingCart">
+                    <tr v-for="instrument in shoppingCart" :key="instrument.id">
                       <td>
                         <img
                           class="img-fluid"
