@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
+import { BASE_URL } from './config/constants';
 import { db } from './data/instruments';
 import Instrument from './components/Instrument.vue';
 import Header from './components/Header.vue';
@@ -82,7 +83,7 @@ watch(shoppingCart, saveShoppingCart, { deep: true });
         v-for="instrument in instruments"
         :id="instrument.id"
         :key="instrument.id"
-        :image="`/img/${instrument.image}.jpg`"
+        :image="`${BASE_URL}/img/${instrument.image}.jpg`"
         :name="instrument.name"
         :description="instrument.description"
         :price="instrument.price"

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { db } from '../data/instruments';
+import { BASE_URL } from '../config/constants';
 
 const props = defineProps({
   shoppingCart: {
@@ -148,7 +149,7 @@ onMounted(() => {
 
     <img
       class="header-guitarra"
-      src="/img/header_guitarra.png"
+      :src="`${BASE_URL}/img/header_guitarra.png`"
       alt="imagen header"
     />
   </header>
