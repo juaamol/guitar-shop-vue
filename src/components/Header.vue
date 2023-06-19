@@ -1,9 +1,24 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   shoppingCart: {
     type: Array,
     required: true,
   },
+});
+
+defineEmits([
+  'increase-quantity',
+  'decrease-quantity',
+  'remove-from-cart',
+  'empty-cart',
+]);
+
+const totalPrice = computed(() => {
+  return props.shoppingCart.reduce((total, instrument) => {
+    return total + instrument.quantity * instrument.price;
+  }, 0);
 });
 </script>
 
@@ -60,19 +75,44 @@ defineProps({
                         ${{ instrument.quantity * instrument.price }}
                       </td>
                       <td class="flex align-items-start gap-4">
-                        <button type="button" class="btn btn-dark">-</button>
+                        <button
+                          type="button"
+                          class="btn btn-dark"
+                          @click="$emit('decrease-quantity', instrument.id)"
+                        >
+                          -
+                        </button>
                         {{ instrument.quantity }}
-                        <button type="button" class="btn btn-dark">+</button>
+                        <button
+                          type="button"
+                          class="btn btn-dark"
+                          @click="$emit('increase-quantity', instrument.id)"
+                        >
+                          +
+                        </button>
                       </td>
                       <td>
-                        <button class="btn btn-danger" type="button">X</button>
+                        <button
+                          class="btn btn-danger"
+                          type="button"
+                          @click="$emit('remove-from-cart', instrument.id)"
+                        >
+                          X
+                        </button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
-                <p class="text-end">Total: <span class="fw-bold">$899</span></p>
-                <button class="btn btn-dark w-100 mt-3 p-2">Empty cart</button>
+                <p class="text-end">
+                  Total: <span class="fw-bold">${{ totalPrice }}</span>
+                </p>
+                <button
+                  class="btn btn-dark w-100 mt-3 p-2"
+                  @click="$emit('empty-cart')"
+                >
+                  Empty cart
+                </button>
               </div>
             </div>
           </div>

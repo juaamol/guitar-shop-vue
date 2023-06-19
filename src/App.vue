@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { db } from './data/instruments';
 import Instrument from './components/Instrument.vue';
 import Header from './components/Header.vue';
@@ -8,26 +8,71 @@ import Footer from './components/Footer.vue';
 const instruments = ref([]);
 const shoppingCart = ref([]);
 
-onMounted(() => {
-  instruments.value = db;
-});
-
 const addToCart = (id) => {
-  const hasInstrumentAddedId = (instrument) => instrument.id === id;
-  const positionInCart = shoppingCart.value.findIndex(hasInstrumentAddedId);
+  const hasId = (instrument) => instrument.id === id;
+  const instrument = instruments.value.find(hasId);
+  const positionInCart = shoppingCart.value.findIndex(hasId);
 
-  if (positionInCart >= 0) {
-    shoppingCart.value[positionInCart].quantity++;
-  } else {
-    const instrument = instruments.value.find(hasInstrumentAddedId);
-    instrument.quantity = 1;
+  instrument.quantity = 1;
+
+  if (positionInCart < 0) {
     shoppingCart.value.push(instrument);
   }
 };
+
+const removeFromCart = (id) => {
+  const hasId = (instrument) => instrument.id === id;
+  const items = shoppingCart.value.filter((item) => !hasId(item));
+  shoppingCart.value = items;
+};
+
+const increaseQuantity = (id) => {
+  const hasId = (instrument) => instrument.id === id;
+  const positionInCart = shoppingCart.value.findIndex(hasId);
+
+  shoppingCart.value[positionInCart].quantity++;
+};
+
+const decreaseQuantity = (id) => {
+  const hasId = (instrument) => instrument.id === id;
+  const positionInCart = shoppingCart.value.findIndex(hasId);
+  const instrument = shoppingCart.value[positionInCart];
+  instrument.quantity--;
+
+  if (instrument.quantity === 0) {
+    const items = shoppingCart.value.filter((item) => !hasId(item));
+    shoppingCart.value = items;
+  }
+};
+
+const emptyShoppingCart = () => {
+  shoppingCart.value = [];
+};
+
+const saveShoppingCart = () => {
+  localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart.value));
+};
+
+const getShoppingCart = () => {
+  return JSON.parse(localStorage.getItem('shoppingCart')) || [];
+};
+
+onMounted(() => {
+  instruments.value = db;
+  shoppingCart.value = getShoppingCart();
+});
+
+watch(shoppingCart, saveShoppingCart, { deep: true });
 </script>
 
 <template>
-  <Header :shoppingCart="shoppingCart"></Header>
+  <Header
+    :shoppingCart="shoppingCart"
+    @increase-quantity="increaseQuantity"
+    @decrease-quantity="decreaseQuantity"
+    @remove-from-cart="removeFromCart"
+    @empty-cart="emptyShoppingCart"
+  ></Header>
 
   <main class="container-xl mt-5">
     <h2 class="text-center">Our collection</h2>
