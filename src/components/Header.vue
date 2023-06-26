@@ -75,7 +75,7 @@ onMounted(() => {
                       <td>
                         <img
                           class="img-fluid"
-                          :src="`/img/${instrument.image}.jpg`"
+                          :src="`${BASE_URL}/img/${instrument.image}.jpg`"
                           alt="imagen guitarra"
                         />
                       </td>
