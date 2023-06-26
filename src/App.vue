@@ -54,7 +54,9 @@ const saveShoppingCart = () => {
 };
 
 const getShoppingCart = () => {
-  return JSON.parse(localStorage.getItem('shoppingCart')) || [];
+  const shoppingCartJSON = localStorage.getItem('shoppingCart');
+  
+  return shoppingCartJSON ? JSON.parse(shoppingCartJSON) : [];
 };
 
 onMounted(() => {
