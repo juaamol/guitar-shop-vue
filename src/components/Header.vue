@@ -51,7 +51,7 @@ onMounted(() => {
           <div class="carrito">
             <img
               class="img-fluid"
-              src="/img/carrito.png"
+              :src="`${BASE_URL}/img/carrito.png`"
               alt="imagen carrito"
             />
 
